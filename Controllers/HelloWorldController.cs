@@ -13,10 +13,12 @@ namespace MovieMVC.Controllers
 
         //GET: /HelloWorld/Welcome
 
-        public string Welcome(string name, string city)
+        public IActionResult Welcome(string name, int numTimes)
         {
-            //HtmlEncoder.Default.Encode protects the app from malicious input, namely Javascript.
-            return HtmlEncoder.Default.Encode($"Welcome {name}. Glad you could make it from {city}");
+            ViewData["Message"] = "Welcome, " + name;
+            ViewData["NumTimes"] = numTimes;
+
+            return View();
         }
     }
 }
