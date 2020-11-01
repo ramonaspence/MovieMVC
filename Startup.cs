@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MovieMVC.Data;
 using Microsoft.EntityFrameworkCore;
+using MovieMVC.Config;
 
 namespace MovieMVC
 {
@@ -27,6 +28,10 @@ namespace MovieMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // add Imdb API Key
+            var ImdbConfig = Configuration.GetSection("Imbd");
+            services.Configure<Imdb>(ImdbConfig);
+
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieMvcContext>(options => 

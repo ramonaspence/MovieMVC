@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>f45fab4c-25f3-44a9-af3c-654cf69e1788</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,4 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Config\" />
+  </ItemGroup>
 </Project>
