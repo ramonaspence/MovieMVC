@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,12 +8,12 @@ namespace MovieMVC.Models
 {
     public class Movie
     {
-        public Movie()
-        {
-            this.MovieTheaters = new HashSet<MovieTheater>();
-        }
+        //public Movie()
+        //{
+        //    MovieTheaters = new Collection<MovieTheater>();
+        //}
 
-        public int Id { get; set; }
+        public int MovieId { get; set; }
         public string Title { get; set; }
 
         [Display(Name = "Release Date")]
@@ -22,8 +22,5 @@ namespace MovieMVC.Models
         public string Genre { get; set; }
 
         public ICollection<MovieTheater> MovieTheaters { get; set; }
-
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal Price { get; set; }
     }
 }

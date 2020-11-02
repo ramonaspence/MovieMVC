@@ -3,18 +3,14 @@ using System.Collections.Generic;
 
 namespace MovieMVC.Models
 {
-    public class MovieTheater
+    public class Theater
     {
-        public MovieTheater()
-        {
-            this.Movies = new HashSet<Movie>();
-        }
-
-        public int Id { get; set; }
+        public int TheaterId { get; set; }
 
         public string Title { get; set; }
         public string Location { get; set; }
 
-        public virtual ICollection<Movie> Movies { get; set; }
+        // MovieTheaters is a collection of Movie-To-Theater relationships.
+        public ICollection<MovieTheater> MovieTheaters { get; set; }
     }
 }

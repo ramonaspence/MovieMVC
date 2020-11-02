@@ -6,11 +6,22 @@ namespace MovieMVC.Data
 {
     public class MovieMvcContext : DbContext
     {
+        public DbSet<Movie> Movie { get; set; }
+
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Theater> Theaters { get; set; }
+        public DbSet<MovieTheater> MovieTheaters { get; set; }
+
         public MovieMvcContext(DbContextOptions<MovieMvcContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Movie> Movie { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MovieTheater>()
+                .HasKey(mt => new { mt.MovieId, mt.TheaterId });
+        }
+
     }
 }
