@@ -38,7 +38,7 @@ namespace MovieMVC
             {
                 var connectionString = Configuration.GetConnectionString("MovieMvcContext");
 
-                if (Environment.IsDevelopment())
+                if(Environment.IsDevelopment())
                 {
                     options.UseSqlite(connectionString);
                 }
