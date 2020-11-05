@@ -5,7 +5,7 @@ namespace MovieMVC.Models
 {
     public class Theater
     {
-        public int TheaterId { get; set; }
+        public int ID { get; set; }
 
         public string Title { get; set; }
         public string Location { get; set; }

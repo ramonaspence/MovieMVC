@@ -20,7 +20,7 @@ namespace MovieMVC.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MovieTheater>()
-                .HasKey(mt => new { mt.MovieId, mt.TheaterId });
+                .HasKey(mt => new { mt.MovieID, mt.TheaterID });
         }
 
     }

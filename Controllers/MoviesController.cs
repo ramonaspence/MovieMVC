@@ -34,7 +34,7 @@ namespace MovieMVC.Controllers
             }
 
             var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.MovieId == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (movie == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace MovieMVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieId,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Create([Bind("ID,Title,ReleaseDate,Genre,Price")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace MovieMVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MovieId,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,ReleaseDate,Genre,Price")] Movie movie)
         {
-            if (id != movie.MovieId)
+            if (id != movie.ID)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace MovieMVC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.MovieId))
+                    if (!MovieExists(movie.ID))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace MovieMVC.Controllers
             }
 
             var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.MovieId == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (movie == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace MovieMVC.Controllers
 
         private bool MovieExists(int id)
         {
-            return _context.Movie.Any(e => e.MovieId == id);
+            return _context.Movie.Any(e => e.ID == id);
         }
     }
 }

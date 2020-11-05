@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,19 +34,8 @@ namespace MovieMVC
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<MovieMvcContext>(options => 
-            {
-                var connectionString = Configuration.GetConnectionString("MovieMvcContext");
-
-                if(Environment.IsDevelopment())
-                {
-                    options.UseSqlite(connectionString);
-                }
-                else
-                {
-                    options.UseSqlServer(connectionString);
-                }
-            });
+            services.AddDbContext<MovieMvcContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MovieMvcContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
