@@ -1,7 +1,23 @@
+@model IEnumerable<Movie>
+
+
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Movies currently in Theaters";
 }
 
 <h2>Index</h2>
 
-<p>Hello from the view template!</p>
+<div style="width:90%;height:100vh;display:flex;justify-content:space-around;">
+    <ul>
+        @foreach (var m in Model)
+        {
+            <li>
+                <h3>@m.Title</h3>
+                <img src={@m.Image} alt="" />
+                <p>@m.FullTitle</p>
+
+            </li>
+        }
+
+    </ul>
+</div>

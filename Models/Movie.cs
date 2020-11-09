@@ -8,10 +8,6 @@ namespace MovieMVC.Models
 {
     public class Movie
     {
-        //public Movie()
-        //{
-        //    MovieTheaters = new Collection<MovieTheater>();
-        //}
 
         public int ID { get; set; }
         public string Title { get; set; }
