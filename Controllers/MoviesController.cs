@@ -1,13 +1,16 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using Microsoft.EntityFrameworkCore;
 using MovieMVC.Data;
 using MovieMVC.Models;
+
 
 namespace MovieMVC.Controllers
 {
@@ -21,24 +24,36 @@ namespace MovieMVC.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult Index()
         {
-            List<Movie> list = new List<Movie>();
+
             HttpClient MovieIndexClient = new HttpClient();
-            var res = MovieIndexClient.GetAsync("https://imdb-api.com/API/intheaters/k_v62b194f").Result;
-            if (res.IsSuccessStatusCode)
+            MovieIndexClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            Task<HttpResponseMessage> request = MovieIndexClient.GetAsync("https://imdb-api.com/API/intheaters/k_v62b194f");
+            // Task<HttpResponseMessage>.Result == HttpResponseMessage
+            HttpResponseMessage response = request.Result;
+            if (response.IsSuccessStatusCode)
             {
-                list = res.Content.ReadAsAsync<List<Movie>>().Result;
+                var jsonString = response.ToString();
+                var movie = JsonSerializer.Deserialize<Movie>(jsonString);
+                // deserialize into C# object, so the object can be sent to the view
+            }
+            else
+            {
+                return BadRequest();
             }
 
+            return ;
 
             // This method should return an Http response
             // It should make a call to the imdb api
             // It should grab all movies that are currently in theater
 
-            return View(list);
-            
-            //return View(await _context.Movie.ToListAsync());
         }
 
         // GET: Movies/Details/5
